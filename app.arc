@@ -1,12 +1,12 @@
 @app
-chasingsummer-2fa3
+svChasingSummer
 
 @aws
 runtime nodejs18.x
 # concurrency 1
 # memory 1152
 # profile default
-# region us-west-1
+region us-west-1
 # timeout 30
 
 @http
@@ -21,12 +21,10 @@ plugin-remix
 @static
 
 @tables
-user
-  pk *String
+summer
+  pk *String  # userId || other
+  sk **String # sortkey 
 
 password
   pk *String # userId
-
-note
-  pk *String  # userId
-  sk **String # noteId
+  sk **String # type

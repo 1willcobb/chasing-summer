@@ -30,10 +30,16 @@ export default function App() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="icon" href="/_static/favicon.ico" />
         <Meta />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Chicle&family=Inter:wght@100..900&family=Poetsen+One&display=swap"
+          rel="stylesheet"
+        />
         <Links />
       </head>
       <body className="h-full">
-        <Outlet />
+        <Outlet /> 
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
