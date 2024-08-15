@@ -1,7 +1,7 @@
 import { Outlet } from "@remix-run/react";
 import Nav from "~/components/Nav";
 
-export default function Blog() {
+export default function videos() {
   return (
     <div
       className="flex flex-col h-full"

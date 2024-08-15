@@ -1,7 +1,15 @@
-export default function AboutUs() {
+import Nav from "~/components/Nav";
+import { Outlet } from "@remix-run/react";
+
+export default function aboutus() {
   return (
-    <div className="bg-blue-200 flex flex-grow justify-center items-center text-center">
-      <h1 className="font-extrabold text-6xl">ABOUT US</h1>
+    <div
+      className="flex flex-col h-full"
+    >
+      <Nav />
+      <section className="flex flex-grow">
+        <Outlet />
+      </section>
     </div>
   );
 }
