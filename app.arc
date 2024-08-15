@@ -1,5 +1,5 @@
 @app
-grunge-stack-template
+chasingsummer-2fa3
 
 @aws
 runtime nodejs18.x
