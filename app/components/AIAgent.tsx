@@ -9,7 +9,12 @@ export default function AIAgent() {
             className="mb-5 bg-base-300 h-24 outline-primary rounded-lg p-2 resize-none w-full"
             placeholder=" Provident cupiditate voluptatem et in. "
           ></textarea>
-          <button className="btn btn-primary px-8">Get Started</button>
+          <button
+            className="btn btn-primary px-8"
+            onClick={() => console.log("get started pressed")}
+          >
+            Get Started
+          </button>
         </div>
       </div>
     </div>

@@ -16,27 +16,14 @@ import AIAgent from "~/components/AIAgent";
 export const meta: MetaFunction = () => [{ title: "AI Agent Demo" }];
 
 export default function Index() {
-  const user = useOptionalUser();
+  // const user = useOptionalUser();
 
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    handleResize(); // Check initial screen size
-    window.addEventListener("resize", handleResize); // Listen for resize events
-
-    return () => {
-      window.removeEventListener("resize", handleResize); // Clean up event listener
-    };
-  }, []);
 
   return (
     <main className="  flex flex-col min-h-screen">
       <Nav />
-      <AIAgent />
+      {/* <AIAgent /> */}
       <Footer />
     </main>
   );

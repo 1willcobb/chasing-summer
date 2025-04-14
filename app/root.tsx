@@ -18,11 +18,8 @@ export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
-export const loader = async ({ request, context }: LoaderFunctionArgs) => {
-  return json({
-    user: await getUser(request),
-    requestUrl: context.requestUrl || request.url,
-  });
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  return json({ user: await getUser(request) });
 };
 
 export default function App() {
@@ -35,18 +32,14 @@ export default function App() {
         <Meta />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Chicle&family=Inter:wght@100..900&family=Poetsen+One&display=swap"
-          rel="stylesheet"
-        />
 
         <Links />
       </head>
       <body className="h-full overflow-x-hidden">
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
       </body>
     </html>
   );
