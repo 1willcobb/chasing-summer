@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react";
 
 export default function Footer() {
   return (
-    <footer className="footer text-base-content p-10">
+    <footer className="footer text-base-content p-10 mt-auto">
       <nav>
         <h6 className="footer-title">Services</h6>
         <Link to="/" className="link link-hover">
@@ -31,7 +31,7 @@ export default function Footer() {
         </Link>
       </nav>
       <nav>
-        <h6 className="footer-title">Legal</h6>
+        <h6 className="footer-title z-0">Legal</h6>
         <Link to="/" className="link link-hover">
           Terms of use
         </Link>

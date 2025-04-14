@@ -11,6 +11,7 @@ import HeroTextLeft from "~/components/HeroTextLeft";
 import Footer from "~/components/Footer";
 import HeroAndImage from "~/components/HeroAndImage";
 import HeroTextRight from "~/components/HeroTextRight";
+import AIAgent from "~/components/AIAgent";
 
 export const meta: MetaFunction = () => [{ title: "Chasing Summer" }];
 
@@ -33,16 +34,9 @@ export default function Index() {
   }, []);
 
   return (
-    <main className=" bg-white flex flex-col ">
+    <main className="  flex flex-col min-h-screen">
       <Nav />
-      <img
-        className="h-full "
-        src={isMobile ? cobbfam : cobbfam2}
-        alt="Dunes in Pismo Beach, California"
-      />
-      <HeroAndImage />
-      <HeroTextLeft />
-      <HeroTextRight />
+      <AIAgent />
       <Footer />
     </main>
   );

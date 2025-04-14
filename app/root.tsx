@@ -13,6 +13,7 @@ import {
 import { getUser } from "~/session.server";
 import stylesheet from "~/tailwind.css";
 
+
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -24,7 +25,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function App() {
   return (
-    <html lang="en" className="h-full bg-white">
+    <html lang="en" className="h-full">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -36,6 +37,7 @@ export default function App() {
           href="https://fonts.googleapis.com/css2?family=Chicle&family=Inter:wght@100..900&family=Poetsen+One&display=swap"
           rel="stylesheet"
         />
+        
         <Links />
       </head>
       <body className="h-full overflow-x-hidden">
