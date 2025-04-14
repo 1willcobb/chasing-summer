@@ -13,7 +13,7 @@ import HeroAndImage from "~/components/HeroAndImage";
 import HeroTextRight from "~/components/HeroTextRight";
 import AIAgent from "~/components/AIAgent";
 
-export const meta: MetaFunction = () => [{ title: "Chasing Summer" }];
+export const meta: MetaFunction = () => [{ title: "AI Agent Demo" }];
 
 export default function Index() {
   const user = useOptionalUser();
