@@ -20,7 +20,7 @@ export default function ChatPage() {
 
     
 
-    const res = await fetch("/api.chat", {
+    const res = await fetch("/api/chat", {
       method: "POST",
       body: JSON.stringify({ messages: newMessages }),
     });
@@ -32,7 +32,7 @@ export default function ChatPage() {
   };
 
   const saveConversation = async () => {
-    await fetch("/api.save-chat", {
+    await fetch("/api/save-chat", {
       method: "POST",
       body: JSON.stringify({ conversation: messages }),
     });

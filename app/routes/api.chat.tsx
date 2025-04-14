@@ -8,7 +8,7 @@ export const action = async ({ request }) => {
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
   const completion = await openai.chat.completions.create({
-    model: "gpt-4",
+    model: "gpt-4.1",
     messages: [
       {
         role: "system",

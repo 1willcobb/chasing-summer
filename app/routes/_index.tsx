@@ -23,7 +23,7 @@ export default function Index() {
   return (
     <main className="  flex flex-col min-h-screen">
       <Nav />
-      {/* <AIAgent /> */}
+      <AIAgent />
       <Footer />
     </main>
   );
