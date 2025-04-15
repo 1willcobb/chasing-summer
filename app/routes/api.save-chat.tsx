@@ -1,16 +1,30 @@
 // app/routes/api.save-chat.tsx
-import { json } from "@remix-run/node";
-// import { db } from "~/utils/db.server"; // replace with your DB method
+import { json, type ActionFunctionArgs } from "@remix-run/node";
+import arc from "@architect/functions";
+import { createId } from "@paralleldrive/cuid2";
+import { type Message } from "~/models/message.server";
 
-export const action = async ({ request }) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
   const { conversation } = await request.json();
-  const id = crypto.randomUUID();
-  const timestamp = new Date().toISOString();
 
-  // 🧠 Replace with your DB save logic
-  console.log("Saving conversation:", { id, timestamp, conversation });
+  if (!Array.isArray(conversation) || conversation.length === 0) {
+    return json({ success: false, error: "Invalid conversation data." }, { status: 400 });
+  }
 
-  // await db.conversations.create({ id, messages: conversation, createdAt: timestamp });
+  const db = await arc.tables();
+  const pk = `USER#demo`; // Replace with actual user logic or session
+  const timestamp = Date.now();
 
-  return json({ success: true, id });
+  const items: Message[] = conversation.map((msg: any, index: number) => ({
+    pk,
+    sk: `MESSAGE#${createId()}`,
+    json: JSON.stringify({
+      ...msg,
+      createdAt: new Date(timestamp + index).toISOString(), // staggered timestamps
+    }),
+  }));
+
+  await Promise.all(items.map((item) => db.summer.put(item)));
+
+  return json({ success: true, count: items.length });
 };

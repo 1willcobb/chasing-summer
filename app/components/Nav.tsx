@@ -12,18 +12,13 @@ export default function Nav() {
       <div className="items-center flex ">
         <ul className="gap-6 px-6 hidden sm:flex">
           <li className="">
-            <Link to="/aboutus" className="footer-title">
-              about
+            <Link to="/docs" className="footer-title">
+              DOCS
             </Link>
           </li>
           <li>
-            <Link to="/blog" className="footer-title ">
-              blog
-            </Link>
-          </li>
-          <li>
-            <Link to="/videos" className="footer-title ">
-              videos
+            <Link to="/log" className="footer-title ">
+              LOG
             </Link>
           </li>
         </ul>
@@ -61,13 +56,10 @@ export default function Nav() {
               ></label>
               <ul className="flex flex-col items-center gap-6 bg-base-200 text-base-content min-h-full w-1/2 p-6 text-4xl">
                 <li className="text-left">
-                  <Link to="/aboutus" className="footer-title ">ABOUT</Link>
+                  <Link to="/docs" className="footer-title ">DOCS</Link>
                 </li>
                 <li>
-                  <Link to="/blog" className="footer-title ">BLOG</Link>
-                </li>
-                <li>
-                  <Link to="/videos" className="footer-title ">VIDEOS</Link>
+                  <Link to="/log" className="footer-title ">LOG</Link>
                 </li>
               </ul>
             </div>

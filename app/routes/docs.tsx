@@ -1,7 +1,7 @@
-import { Outlet } from "@remix-run/react";
 import Nav from "~/components/Nav";
+import { Outlet } from "@remix-run/react";
 
-export default function Blog() {
+export default function Docs() {
   return (
     <div
       className="flex flex-col h-full"
