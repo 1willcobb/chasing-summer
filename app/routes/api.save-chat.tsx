@@ -14,17 +14,21 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const db = await arc.tables();
   const pk = `USER#demo`; // Replace with actual user logic or session
   const timestamp = Date.now();
+  const conversationId = createId();
 
-  const items: Message[] = conversation.map((msg: any, index: number) => ({
+  // Create a single item with the entire conversation
+  const item: Message = {
     pk,
-    sk: `MESSAGE#${createId()}`,
+    sk: `MESSAGE#${conversationId}`,
     json: JSON.stringify({
-      ...msg,
-      createdAt: new Date(timestamp + index).toISOString(), // staggered timestamps
+      id: conversationId,
+      messages: conversation,
+      createdAt: new Date(timestamp).toISOString(),
+      updatedAt: new Date(timestamp).toISOString()
     }),
-  }));
+  };
 
-  await Promise.all(items.map((item) => db.summer.put(item)));
+  await db.summer.put(item);
 
-  return json({ success: true, count: items.length });
+  return json({ success: true, conversationId });
 };
