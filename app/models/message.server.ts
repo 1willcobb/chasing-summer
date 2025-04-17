@@ -43,4 +43,21 @@ export async function deleteMessage(pk: Message["pk"], sk: Message["sk"]): Promi
   const db = await arc.tables();
   await db.summer.delete({ pk, sk });
 }
+
+export async function deleteAllMessages(pk: Message["pk"]): Promise<void> {
+  const db = await arc.tables();
+  const result = await db.summer.query({
+    KeyConditionExpression: "pk = :pk AND begins_with(sk, :skPrefix)",
+    ExpressionAttributeValues: {
+      ":pk": pk,
+      ":skPrefix": "MESSAGE#",
+    },
+  });
+
+  const deletePromises = result.Items.map((item: Message) => {
+    return db.summer.delete({ pk, sk: item.sk });
+  });
+
+  await Promise.all(deletePromises);
+}
  

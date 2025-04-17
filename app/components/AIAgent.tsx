@@ -1,8 +1,7 @@
-// Update the AIAgent.tsx component to fix hydration issues
-
 import { useEffect, useState } from "react";
 
 export default function AIAgent() {
+  // Use the same initial state for both server and client
   const [messages, setMessages] = useState([
     {
       role: "assistant",
@@ -11,6 +10,9 @@ export default function AIAgent() {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  // Move to useEffect to prevent hydration mismatch
+  // Any state that should only exist on client-side should be initialized in useEffect
   const [showSuccess, setShowSuccess] = useState(false);
 
   const sendMessage = async () => {

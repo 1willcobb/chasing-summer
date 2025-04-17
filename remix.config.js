@@ -24,4 +24,9 @@ export default {
   future: {
     v7_relativeSplatPath: true,
   },
+  dev: {
+    port: 8002, // or any port you prefer
+    appServerPort: 3000, // your app server port
+    rebuildPollIntervalMs: 1000,
+  },
 };

@@ -4,3 +4,11 @@
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark;
 }
+
+.hydration-fix {
+  display: none;
+}
+
+html.js .hydration-fix {
+  display: block;
+}

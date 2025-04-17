@@ -1,8 +1,6 @@
-// First, let's update the root.tsx file to fix the hydration issues
-
+// In app/root.tsx
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -10,7 +8,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  // useLoaderData,
 } from "@remix-run/react";
 
 import { getUser } from "~/session.server";
@@ -22,12 +19,10 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  return json({ user: await getUser(request) });
+  return { user: await getUser(request) };
 };
 
 export default function App() {
-  // const { user } = useLoaderData<typeof loader>();
-  
   return (
     <html lang="en" className="h-full">
       <head>
@@ -36,7 +31,11 @@ export default function App() {
         <link rel="icon" href="/_static/favicon.ico" />
         <Meta />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
         <Links />
       </head>
       <body className="h-full overflow-x-hidden">
