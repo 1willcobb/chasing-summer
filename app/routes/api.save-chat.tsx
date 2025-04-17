@@ -1,6 +1,8 @@
-import { type ActionFunctionArgs } from "@remix-run/node";
+
 import arc from "@architect/functions";
 import { createId } from "@paralleldrive/cuid2";
+import { type ActionFunctionArgs } from "@remix-run/node";
+
 import { type Message } from "~/models/message.server";
 
 export const action = async ({ request }: ActionFunctionArgs) => {

@@ -1,11 +1,10 @@
 import { Link } from "@remix-run/react";
-import logo from "~/images/chasingsummer_logos_handdrawn_R3-03.png";
 
 export default function Nav() {
   return (
     <nav className="flex justify-between absolute p-4 w-full ">
-      <div className="flex">
-        <Link to="/" className="footer-title text-4xl whitespace-nowrap">
+      <div className="flex items-center">
+        <Link to="/" className="footer-title lg:text-4xl whitespace-nowrap sm:text-3xl text-2xl">
           AI AGENT
         </Link>
       </div>
@@ -31,7 +30,11 @@ export default function Nav() {
             />
             <div className="drawer-content">
               {/* Page content here */}
-              <label htmlFor="my-drawer-4" className="btn btn-ghost sm:hidden">
+              <button
+                onClick={() => document.getElementById("my-drawer-4")?.click()}
+                className="btn btn-ghost sm:hidden"
+                aria-label="Open menu"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -46,7 +49,7 @@ export default function Nav() {
                     d="M4 6h16M4 12h8m-8 6h16"
                   />
                 </svg>
-              </label>
+              </button>
             </div>
             <div className="drawer-side">
               <label
@@ -56,10 +59,14 @@ export default function Nav() {
               ></label>
               <ul className="flex flex-col items-center gap-6 bg-base-200 text-base-content min-h-full w-1/2 p-6 text-4xl">
                 <li className="text-left">
-                  <Link to="/docs" className="footer-title ">DOCS</Link>
+                  <Link to="/docs" className="footer-title ">
+                    DOCS
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/log" className="footer-title ">LOG</Link>
+                  <Link to="/log" className="footer-title ">
+                    LOG
+                  </Link>
                 </li>
               </ul>
             </div>

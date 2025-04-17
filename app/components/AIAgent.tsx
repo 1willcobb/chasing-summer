@@ -10,14 +10,14 @@ export default function AIAgent() {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  
+
   // Move to useEffect to prevent hydration mismatch
   // Any state that should only exist on client-side should be initialized in useEffect
   const [showSuccess, setShowSuccess] = useState(false);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-    
+
     const newMessages = [...messages, { role: "user", content: input }];
     setMessages(newMessages);
     setLoading(true);
@@ -95,22 +95,24 @@ export default function AIAgent() {
             <button
               onClick={sendMessage}
               disabled={loading || !input.trim()}
-              className={`bg-blue-600 text-white px-4 py-2 rounded-md ${loading || !input.trim() ? 'opacity-50' : ''}`}
+              className={`bg-blue-600 text-white px-4 py-2 rounded-md ${loading || !input.trim() ? "opacity-50" : ""}`}
             >
               {loading ? "Sending..." : "Send"}
             </button>
             <button
               onClick={saveConversation}
               disabled={messages.length <= 1}
-              className={`bg-green-600 text-white px-4 py-2 rounded-md ${messages.length <= 1 ? 'opacity-50' : ''}`}
+              className={`bg-green-600 text-white px-4 py-2 rounded-md ${messages.length <= 1 ? "opacity-50" : ""}`}
             >
               Done
             </button>
           </div>
 
-          {showSuccess && (
-            <p className="text-lg text-green-600 mt-4">✅ Conversation saved!</p>
-          )}
+          {showSuccess ? (
+            <p className="text-lg text-green-600 mt-4">
+              ✅ Conversation saved!
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

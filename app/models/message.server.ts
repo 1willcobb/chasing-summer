@@ -19,7 +19,7 @@ export async function getAllMessages(pk: Message["pk"]): Promise<Message[]> {
     },
   });
 
-  return result.Items.map((item: any) => ({
+  return result.Items.map((item: Message) => ({
     pk: item.pk,
     sk: item.sk,
     json: item.json,

@@ -1,9 +1,11 @@
 // app/routes/log.tsx
 import { ActionFunctionArgs } from "@remix-run/node";
 import { useLoaderData, useSubmit, useNavigation } from "@remix-run/react";
-import { useState } from "react";
-import { getAllMessages, deleteAllMessages } from "~/models/message.server";
 import { format } from "date-fns";
+import { useState } from "react";
+
+import { getAllMessages, deleteAllMessages } from "~/models/message.server";
+
 
 export const loader = async () => {
   const pk = "USER#demo"; // hard coded
@@ -61,7 +63,7 @@ export default function Log() {
   };
 
   return (
-    <div className="bg-base-100 min-h-screen w-full p-6 flex flex-col justify-start items-center m-auto">
+    <div className="bg-base-100 min-h-screen w-full p-6 flex flex-col justify-start items-center mx-auto mt-10">
       <h1 className="text-3xl font-bold mb-4 text-center">LOG</h1>
       <p className="mb-6 text-sm text-gray-400">
         Total messages: {messages?.length ?? 0}
@@ -81,6 +83,7 @@ export default function Log() {
           </div>
         ) : (
           messages.map((m, i) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             let parsed: any = {};
             try {
               parsed = JSON.parse(m.json);
@@ -107,9 +110,9 @@ export default function Log() {
               >
                 <div className="font-mono truncate text-sm">
                   <strong>{timestamp}</strong>: {preview}
-                  {preview.length >= 100 && "..."}
+                  {preview.length >= 100 ? "..." : null}
                 </div>
-                {openIndex === i && (
+                {openIndex === i ? (
                   <div className="mt-2 text-left text-sm text-gray-300 whitespace-pre-wrap">
                     <pre className="break-words whitespace-pre-wrap overflow-x-auto">
                       {JSON.stringify(m, null, 2)}
@@ -123,7 +126,7 @@ export default function Log() {
                       </pre>
                     </div>
                   </div>
-                )}
+                ): null}
               </div>
             );
           })
