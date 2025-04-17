@@ -1,3 +1,5 @@
+// Update the AIAgent.tsx component to fix hydration issues
+
 import { useEffect, useState } from "react";
 
 export default function AIAgent() {
@@ -8,43 +10,63 @@ export default function AIAgent() {
     },
   ]);
   const [input, setInput] = useState("");
-  const [, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
   const sendMessage = async () => {
+    if (!input.trim()) return;
+    
     const newMessages = [...messages, { role: "user", content: input }];
     setMessages(newMessages);
     setLoading(true);
 
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      body: JSON.stringify({ messages: newMessages }),
-    });
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ messages: newMessages }),
+      });
 
-    const data = await res.json();
-    setMessages([...newMessages, data.reply]);
-    setInput("");
-    setLoading(false);
+      if (res.ok) {
+        const data = await res.json();
+        setMessages((prev) => [...prev, data.reply]);
+      } else {
+        console.error("Error sending message");
+      }
+    } catch (error) {
+      console.error("Failed to send message:", error);
+    } finally {
+      setInput("");
+      setLoading(false);
+    }
   };
 
   const saveConversation = async () => {
-    await fetch("/api/save-chat", {
-      method: "POST",
-      body: JSON.stringify({ conversation: messages }),
-    });
-    setDone(true);
-    setShowSuccess(true);
+    try {
+      await fetch("/api/save-chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ conversation: messages }),
+      });
+      setShowSuccess(true);
+    } catch (error) {
+      console.error("Failed to save conversation:", error);
+    }
   };
 
-  // Hide the message after 2 seconds
+  // Hide the success message after 2 seconds
   useEffect(() => {
+    let timer: NodeJS.Timeout;
     if (showSuccess) {
-      const timer = setTimeout(() => {
+      timer = setTimeout(() => {
         setShowSuccess(false);
       }, 2000);
-      return () => clearTimeout(timer);
     }
+    return () => clearTimeout(timer);
   }, [showSuccess]);
 
   return (
@@ -64,27 +86,28 @@ export default function AIAgent() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             className="mb-5 bg-base-300 h-24 outline-primary rounded-lg p-2 resize-none w-full test-right"
-            placeholder=" Provident cupiditate voluptatem et in. "
+            placeholder="Type your message here..."
           ></textarea>
 
           <div className="flex gap-2">
             <button
               onClick={sendMessage}
-              disabled={loading}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md"
+              disabled={loading || !input.trim()}
+              className={`bg-blue-600 text-white px-4 py-2 rounded-md ${loading || !input.trim() ? 'opacity-50' : ''}`}
             >
-              Send
+              {loading ? "Sending..." : "Send"}
             </button>
             <button
               onClick={saveConversation}
-              className="bg-green-600 text-white px-4 py-2 rounded-md"
+              disabled={messages.length <= 1}
+              className={`bg-green-600 text-white px-4 py-2 rounded-md ${messages.length <= 1 ? 'opacity-50' : ''}`}
             >
               Done
             </button>
           </div>
 
           {showSuccess && (
-            <p className="text-lg text-green-600">✅ Conversation saved!</p>
+            <p className="text-lg text-green-600 mt-4">✅ Conversation saved!</p>
           )}
         </div>
       </div>
