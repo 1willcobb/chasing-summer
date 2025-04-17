@@ -8,7 +8,7 @@ export default function AIAgent() {
     },
   ]);
   const [input, setInput] = useState("");
-  const [done, setDone] = useState(false);
+  const [, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 

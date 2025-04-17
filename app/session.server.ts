@@ -26,7 +26,7 @@ export async function getSession(request: Request) {
 
 export async function getUserId(
   request: Request,
-): Promise<User["id"] | undefined> {
+): Promise<User["sk"] | undefined> {
   const session = await getSession(request);
   const userId = session.get(USER_SESSION_KEY);
   return userId;
@@ -36,7 +36,7 @@ export async function getUser(request: Request) {
   const userId = await getUserId(request);
   if (userId === undefined) return null;
 
-  const user = await getUserById(userId);
+  const user = await getUserById(`USER#${userId}`);
   if (user) return user;
 
   throw await logout(request);
@@ -57,7 +57,7 @@ export async function requireUserId(
 export async function requireUser(request: Request) {
   const userId = await requireUserId(request);
 
-  const user = await getUserById(userId);
+  const user = await getUserById(`USER#${userId}`);
   if (user) return user;
 
   throw await logout(request);

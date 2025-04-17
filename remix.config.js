@@ -21,5 +21,7 @@ export default {
         path.relative(appDir, "cypress/support/test-routes/create-user.ts"),
       );
     }),
-    
+  future: {
+    v7_relativeSplatPath: true,
+  },
 };

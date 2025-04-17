@@ -9,7 +9,7 @@ import { useEffect, useRef } from "react";
 
 
 import { verifyLogin } from "~/models/user.server";
-import { createUserSession, getUserId, getUserByEmail } from "~/session.server";
+import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
 
 

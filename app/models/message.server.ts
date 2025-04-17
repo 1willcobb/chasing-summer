@@ -1,6 +1,5 @@
 import arc from "@architect/functions";
 import { createId } from "@paralleldrive/cuid2";
-import invariant from "tiny-invariant";
 
 
 export interface Message {
@@ -31,7 +30,7 @@ export async function getAllMessages(pk: Message["pk"]): Promise<Message[]> {
 
 export async function createMessage(pk: Message["pk"], content: object): Promise<Message> {
   const db = await arc.tables();
-  const sk = `MESSAGE#${createId()}`;
+  const sk: Message["sk"] = `MESSAGE#${createId()}`;
   const json = JSON.stringify(content);
 
   const newMessage: Message = { pk, sk, json };

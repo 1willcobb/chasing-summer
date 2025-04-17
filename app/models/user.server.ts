@@ -5,6 +5,7 @@ import invariant from "tiny-invariant";
 
 
 export interface User {
+  [x: string]: string;
   pk: `USER#${string}`
   sk: "details"
   username: string;
@@ -90,7 +91,7 @@ export async function createUser(
 ): Promise<User> {
   console.log(" createUser", email, password);
   const hashedPassword = await bcrypt.hash(password, 10);
-  const userId = `USER#${createId()}`;
+  const userId = `USER#${createId()}` as const as `USER#${string}`;
   const db = await arc.tables();
 
   if (await getUserByEmail(email)) {
@@ -121,9 +122,11 @@ export async function createUser(
       // communities: ["myFilmFriends"],
       // createdAt: new Date().toISOString(),
     });
+
+    return { pk: userId, sk: "details", username, email };
   
   } catch (error) {
-    invariant(false, error);
+    invariant(false, error instanceof Error ? error.message : String(error));
   }
   
 }
